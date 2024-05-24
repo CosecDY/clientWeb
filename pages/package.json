@@ -1,0 +1,22 @@
+{
+  "name": "my_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "install:prod": "npm install --omit=dev",
+    "build": "node lib/server.js",
+    "dev": "node index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "gapi-script": "^1.2.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.0",
+    "react-google-login": "^5.2.2"
+  }
+}
