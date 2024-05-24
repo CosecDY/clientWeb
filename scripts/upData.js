@@ -151,7 +151,7 @@ document
   });
 
 function sendDataToApi(data) {
-  fetch("https://webtest-production.up.railway.app/create", {
+  fetch("https://serverweb-production-f3af.up.railway.app/create", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

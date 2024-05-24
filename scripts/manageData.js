@@ -2,7 +2,7 @@ let currentCell;
 let startCell;
 
 // URL of the JSON file
-const jsonURL = "https://webtest-production.up.railway.app/readData";
+const jsonURL = "https://serverweb-production-f3af.up.railway.app/readData";
 // Function to fetch JSON data
 function fetchJSONData(url) {
   return fetch(url)
@@ -149,7 +149,7 @@ function submitInsertForm() {
   };
   var arr = [data]
   console.log(arr);
-  fetch('https://webtest-production.up.railway.app/create', {
+  fetch('https://serverweb-production-f3af.up.railway.app/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -177,7 +177,7 @@ function searchStudentScore() {
   var scoreType = document.getElementById("score_type").value;
   var scoreValue = document.getElementById("score_value").value;
 
-  const queryURL = `https://webtest-production.up.railway.app/queryData?scoreType=${scoreType}&scoreValue=${scoreValue}`;
+  const queryURL = `https://serverweb-production-f3af.up.railway.app/queryData?scoreType=${scoreType}&scoreValue=${scoreValue}`;
 
   fetch(queryURL)
     .then((response) => {
@@ -231,7 +231,7 @@ function openUpdateModal() {
 }
 
 function updateStudent(studentId, updatedData) {
-  fetch(`https://webtest-production.up.railway.app/update/${studentId}`, {
+  fetch(`https://serverweb-production-f3af.up.railway.app/update/${studentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -257,7 +257,7 @@ function updateStudent(studentId, updatedData) {
 function searchAndUpdateStudent() {
   var studentInput = document.getElementById("search_student_id");
   var studentId = studentInput.value;
-  fetch(`https://webtest-production.up.railway.app/search/${studentId}`)
+  fetch(`https://serverweb-production-f3af.up.railway.app/search/${studentId}`)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Student not found");
@@ -303,7 +303,7 @@ function submitUpdateForm() {
     english_score: document.getElementById("english_score_update_modal").value,
   };
 
-  fetch(`https://webtest-production.up.railway.app/update/${studentId}`, {
+  fetch(`https://serverweb-production-f3af.up.railway.app/update/${studentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -335,7 +335,7 @@ function openDeleteModal() {
 function submitDeleteForm() {
   var studentInput = document.getElementById("student_id_modal");
   var studentId = studentInput.value;
-  fetch(`https://webtest-production.up.railway.app/delete/${studentId}`, {
+  fetch(`https://serverweb-production-f3af.up.railway.app/delete/${studentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
