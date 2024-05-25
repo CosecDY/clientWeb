@@ -147,24 +147,24 @@ function submitInsertForm() {
     science_score: mySci,
     english_score: myEng
   };
-  var arr = [data]
+  var dataArray  = [data]
   console.log(arr);
   fetch('https://serverweb-production-f3af.up.railway.app/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(arr)
-    })
-    .then(response => response.json())
-    .then(arr => {
-      console.log('Success:', arr);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
-  location.reload();
-  $("#insertModal").modal("hide");
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataArray)
+  })
+  .then(response => response.json())
+  .then(responseData => {
+    console.log('Success:', responseData);
+    location.reload(); 
+    $("#insertModal").modal("hide"); 
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 }
 
 // Function to open query modal
