@@ -349,10 +349,11 @@ function submitDeleteForm() {
     })
     .then((data) => {
       console.log(data);
+      location.reload();
       $("#deleteModal").modal("hide");
     })
     .catch((error) => {
       console.error(error);
     });
-  location.reload();
+  
 }
