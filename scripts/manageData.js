@@ -29,17 +29,21 @@ function createTableFromJSON(data) {
   // Create table header row
   const headerRow = table.insertRow();
   for (let key in data[0]) {
-    const headerCell = document.createElement("th");
-    headerCell.textContent = key;
-    headerRow.appendChild(headerCell);
+    if (key !== "id") { // Skip the 'id' field
+      const headerCell = document.createElement("th");
+      headerCell.textContent = key;
+      headerRow.appendChild(headerCell);
+    }
   }
 
   // Create table rows with data
   data.forEach((item) => {
     const row = table.insertRow();
     for (let key in item) {
-      const cell = row.insertCell();
-      cell.textContent = item[key];
+      if (key !== "id") { // Skip the 'id' field
+        const cell = row.insertCell();
+        cell.textContent = item[key];
+      }
     }
   });
 
@@ -54,6 +58,7 @@ function createTableFromJSON(data) {
     currentCell = event.target;
   });
 }
+
 
 // Function to make table editable
 function makeTableEditable(table) {
