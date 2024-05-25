@@ -148,7 +148,7 @@ function submitInsertForm() {
     english_score: myEng
   };
   var dataArray  = [data]
-  console.log(arr);
+  console.log(dataArray);
   fetch('https://serverweb-production-f3af.up.railway.app/create', {
     method: 'POST',
     headers: {
