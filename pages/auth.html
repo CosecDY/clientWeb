@@ -7,10 +7,8 @@
     <title>Login With Google</title>
 </head>
 <body>
-
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script>
         function onSignIn(googleUser) {
             var profile = googleUser.getBasicProfile();
@@ -21,7 +19,6 @@
         
         }
     </script>  
-    <script src="../scripts/auth.js"></script>
 </body>
 </html>
 
