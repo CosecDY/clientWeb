@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import viteLogo from '/vite.svg';   
 import './App.css';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script';
 
 function App() {
   const [profile, setProfile] = useState(null);
-  const clientId = "476624476923-ibkgsvd543s8150sa62a3169dd43rkhq.apps.googleusercontent.com";
+  const clientId = "156424399259-dkedh7nn731tgtk5itiimhqjm9i3craj.apps.googleusercontent.com";
 
   useEffect(() => {
     const initClient = () => {
