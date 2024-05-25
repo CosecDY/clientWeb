@@ -1,65 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://accounts.google.com/gsi/client" async></script>
-    <title>Google Authentication</title>
-
+    <title>Login with Google</title>
+    <meta name="google-signin-client_id" content="176915472690-smathhsfr749uikeuig0in7dqvvvjfi5.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <style>
+        /* Customize the sign-in button */
+        .g-signin2 {
+            margin-top: 20px;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Google Authentication</h1>
-    <button onclick="signIn()">Sign in with Google</button>
-
-    <script src="https://apis.google.com/js/api.js"></script>
+    <!-- Google Sign-In button -->
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
     <script>
-        function signIn() {
-            gapi.load('auth2', function () {
-                auth2 = gapi.auth2.init({
-                    client_id: '176915472690-fd1ks98ttrnl59a3rdnss0btptobr463.apps.googleusercontent.com',
-                    scope: 'email',
-                    redirect_url: 'http://127.0.0.1:5500/pages/manageData.html',
-                    include_granted_scopes: 'true',
-                    state: 'pass-through-value',
-                    response_type: 'token'
-                });
-                auth2.signIn().then(function (googleUser) {
-                    var profile = googleUser.getBasicProfile();
-                    console.log('ID: ' + profile.getId());
-                    console.log('Full Name: ' + profile.getName());
-                    console.log('Given Name: ' + profile.getGivenName());
-                    console.log('Family Name: ' + profile.getFamilyName());
-                    console.log('Image URL: ' + profile.getImageUrl());
-                    console.log('Email: ' + profile.getEmail());
+        // Function to handle successful sign-in
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-                    var userData = {
-                        oauth_provider: 'google',
-                        oauth_uid: profile.getId(),
-                        first_name: profile.getGivenName(),
-                        last_name: profile.getFamilyName(),
-                        email: profile.getEmail(),
-                        picture: profile.getImageUrl()
-                    };
+            // Get the ID token
+            var id_token = googleUser.getAuthResponse().id_token;
+            console.log("ID Token: " + id_token);
 
-                    fetch('http://localhost:3000/insert_user', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(userData)
-                    })
-                        .then(response => response.json())
-                        .then(data => console.log(data))
-                        .catch(error => console.error('Error:', error));
-                });
-            });
+            // Send the ID token to your backend for verification
+            sendTokenToBackend(id_token);
         }
 
+        // Function to send ID token to backend for verification
+        function sendTokenToBackend(token) {
+            // Make an HTTP POST request to your backend endpoint
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://serverweb-production-f3af.up.railway.app/tokensignin', true); // Adjust the URL to your backend endpoint
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log('Token verification successful');
+                    // Handle successful token verification, e.g., redirect to dashboard
+                } else {
+                    console.error('Token verification failed');
+                    // Handle token verification failure
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('Error sending token to backend');
+                // Handle network errors or other issues
+            };
+
+            // Send the ID token as JSON payload
+            xhr.send(JSON.stringify({ id_token: token }));
+        }
     </script>
-</body>
 
+    <script>
+        // Function to sign out
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+
+    <!-- Sign out button (optional) -->
+    <button onclick="signOut()">Sign out</button>
+
+</body>
 </html>
