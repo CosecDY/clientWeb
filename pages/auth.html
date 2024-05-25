@@ -67,7 +67,8 @@
             document.getElementById('profile-info').style.display = 'block';
             document.querySelector('.g-signin2').style.display = 'none';
 
-            window.location.href = 'pages/manageData.html';
+            // Remove the window.closed call
+            // window.location.href = 'pages/manageData.html';
         }
 
         document.getElementById('logout-button').addEventListener('click', function() {
@@ -80,3 +81,5 @@
     </script>
 </body>
 </html>
+
+
