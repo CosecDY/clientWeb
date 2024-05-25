@@ -147,18 +147,18 @@ function submitInsertForm() {
     science_score: mySci,
     english_score: myEng
   };
-  var arr = [data]
+  // var arr = [data]
   console.log(arr);
-  fetch('https://serverweb-production-f3af.up.railway.app/create', {
+  fetch('https://serverweb-production-f3af.up.railway.app/insertData', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(arr)
+      body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(arr => {
-      console.log('Success:', arr);
+    .then(data => {
+      console.log('Success:', data);
     })
     .catch((error) => {
       console.error('Error:', error);
