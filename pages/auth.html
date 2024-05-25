@@ -67,8 +67,8 @@
             document.getElementById('profile-info').style.display = 'block';
             document.querySelector('.g-signin2').style.display = 'none';
 
-            // Remove the window.closed call
-            // window.location.href = 'pages/manageData.html';
+            // Redirect user to another page
+            window.location.href = 'pages/manageData.html'; // Adjust the URL as needed
         }
 
         document.getElementById('logout-button').addEventListener('click', function() {
@@ -79,6 +79,8 @@
             });
         });
     </script>
+    <!-- Load the Google API client library -->
+    <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>
 
