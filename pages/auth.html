@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,65 +23,10 @@
     </script>  
     <script src="../scripts/auth.js"></script>
 </body>
-</html> -->
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="156424399259-dkedh7nn731tgtk5itiimhqjm9i3craj.apps.googleusercontent.com">
-    <title>Login With Google</title>
-    <style>
-        img { max-width: 100px; }
-    </style>
-</head>
-<body>
-
-    <h2>Google Login</h2>
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-
-    <div id="profile-info" style="display: none;">
-        <img id="profile-img" src="" alt="user">
-        <h3>User Logged In</h3>
-        <p id="profile-name"></p>
-        <p id="profile-email"></p>
-        <button id="logout-button">Log out</button>
-    </div>
-
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); 
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail());
-
-            // Update the UI with the user's profile information
-            document.getElementById('profile-img').src = profile.getImageUrl();
-            document.getElementById('profile-name').innerText = `Name: ${profile.getName()}`;
-            document.getElementById('profile-email').innerText = `Email: ${profile.getEmail()}`;
-            document.getElementById('profile-info').style.display = 'block';
-            document.querySelector('.g-signin2').style.display = 'none';
-
-            // Redirect user to another page
-            window.location.href = 'pages/manageData.html'; // Adjust the URL as needed
-        }
-
-        document.getElementById('logout-button').addEventListener('click', function() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            auth2.signOut().then(function() {
-                document.getElementById('profile-info').style.display = 'none';
-                document.querySelector('.g-signin2').style.display = 'block';
-            });
-        });
-    </script>
-    <!-- Load the Google API client library -->
-    <script src="https://apis.google.com/js/api.js"></script>
-</body>
 </html>
+
+
+
+
 
 
