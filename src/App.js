@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { GoogleLogin, GoogleLogout } from '@react-oauth/google';
+// import axios from 'axios';
+import './App.css';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import { gapi } from 'gapi-script';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -21,6 +23,17 @@ function App() {
   const onSuccess = (res) => {
     setProfile(res.profileObj);
     console.log('success', res);
+
+    // Send profile data to the backend
+    // axios.post('http://localhost:5000/api/profile', res.profileObj, {
+    //   withCredentials: true, // Ensure credentials are sent with the request
+    // })
+    //   .then(response => {
+    //     console.log('Profile data saved:', response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error saving profile data:', error);
+    //   });
   };
 
   const onFailure = (res) => {
@@ -32,7 +45,8 @@ function App() {
   };
 
   const goToDatabase = () => {
-    navigate('/pages/manageData.html'); 
+    navigate('/pages/manageData.html');
+    window.location.reload(); 
   };
 
   return (
@@ -57,7 +71,7 @@ function App() {
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'} 
           isSignedIn={true}
-        /> 
+        />
       )}
     </div>
   );
@@ -68,8 +82,9 @@ export default function AppWrapper() {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/pages/manageData.html" element={<iframe src="/manageData.html" title="Managed Data" />} />
+        <Route path="/manageData.html" element={<iframe src="/manageData.html" title="Managed Data" />} />
       </Routes>
     </Router>
   );
 }
+
