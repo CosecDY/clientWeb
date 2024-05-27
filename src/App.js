@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.css';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, GoogleLogout } from '@react-oauth/google';
 import { gapi } from 'gapi-script';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -33,8 +32,7 @@ function App() {
   };
 
   const goToDatabase = () => {
-    navigate('/pages/manageData.html');
-    window.location.reload(); 
+    navigate('/pages/manageData.html'); 
   };
 
   return (
@@ -48,7 +46,7 @@ function App() {
           <p>Name: {profile.name}</p>
           <p>Email: {profile.email}</p>
           <br />
-          <button onClick={logOut}>Log out</button> 
+          <GoogleLogout clientId={clientId} buttonText='Log out' onLogoutSuccess={logOut} />
           <button onClick={goToDatabase}>Go to database</button>
         </div>
       ) : (
@@ -58,6 +56,7 @@ function App() {
           onSuccess={onSuccess}
           onFailure={onFailure}
           cookiePolicy={'single_host_origin'} 
+          isSignedIn={true}
         /> 
       )}
     </div>
@@ -69,7 +68,7 @@ export default function AppWrapper() {
     <Router>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/manageData.html" element={<iframe src="/manageData.html" title="Managed Data" />} />
+        <Route path="/pages/manageData.html" element={<iframe src="/manageData.html" title="Managed Data" />} />
       </Routes>
     </Router>
   );
