@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 // import axios from 'axios';
 import './App.css';
+import { GoogleLogin, GoogleLogout } from '@react-oauth/google'; // เปลี่ยน import นี้
 import { gapi } from 'gapi-script';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -59,11 +60,11 @@ function App() {
           <p>Name: {profile.name}</p>
           <p>Email: {profile.email}</p>
           <br />
-          <useGoogleLogout clientId={clientId} buttonText='Log out' onLogoutSuccess={logOut} /> {/* เปลี่ยนแท็กนี้ */}
+          <GoogleLogout clientId={clientId} buttonText='Log out' onLogoutSuccess={logOut} /> 
           <button onClick={goToDatabase}>Go to database</button>
         </div>
       ) : (
-        <useGoogleLogin
+        <GoogleLogin
           clientId={clientId}
           buttonText="Sign in with Google"
           onSuccess={onSuccess}
